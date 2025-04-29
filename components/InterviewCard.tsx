@@ -14,7 +14,7 @@ const InterviewCard = async ({
   role,
   type,
   techstack,
-  createdAt, 
+  createdAt,
 }: InterviewCardProps) => {
   const feedback =
     userId && interviewId
@@ -38,13 +38,13 @@ const InterviewCard = async ({
   ).format("MMM D, YYYY");
 
   return (
-    <div className="card-border w-[360px] max-sm:w-full min-h-96">
+    <div className=" w-[320px] max-sm:w-full min-h-[350px] rounded-sm hover:shadow-[0_0_10px_2px_rgba(147,51,234,0.5)] transition-all duration-300 hover:ring-2 hover:ring-purple-600">
       <div className="card-interview">
         <div>
           {/* Type Badge */}
           <div
             className={cn(
-              "absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg",
+              "absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg ",
               badgeColor
             )}
           >
@@ -52,37 +52,40 @@ const InterviewCard = async ({
           </div>
 
           {/* Cover Image */}
+
+
+          
           <Image
             src={getRandomInterviewCover()}
             alt="cover-image"
-            width={90}
-            height={90}
-            className="rounded-full object-fit size-[90px]"
+            width={75}
+            height={75}
+            className="rounded-full object-fit size-[30px] mt-5"
           />
 
           {/* Interview Role */}
-          <h3 className="mt-5 capitalize">{role} Interview</h3>
+          <h3 className="mt-3 text-base capitalize">{role} Interview</h3>
 
           {/* Date & Score */}
-          <div className="flex flex-row gap-5 mt-3">
-            <div className="flex flex-row gap-2">
+          <div className="flex flex-row gap-4 mt-2 text-sm">
+            <div className="flex flex-row gap-1.5">
               <Image
                 src="/calendar.svg"
-                width={22}
-                height={22}
+                width={10}
+                height={10}
                 alt="calendar"
               />
               <p>{formattedDate}</p>
             </div>
 
-            <div className="flex flex-row gap-2 items-center">
-              <Image src="/star.svg" width={22} height={22} alt="star" />
+            <div className="flex flex-row gap-1.5 items-center">
+              <Image src="/star.svg" width={10} height={10} alt="star" />
               <p>{feedback?.totalScore || "---"}/100</p>
             </div>
           </div>
 
           {/* Feedback or Placeholder Text */}
-          <p className="line-clamp-2 mt-5">
+          <p className="line-clamp-2 mt-3 text-sm">
             {feedback?.finalAssessment ||
               "You haven't taken this interview yet. Take it now to improve your skills."}
           </p>
@@ -91,7 +94,7 @@ const InterviewCard = async ({
         <div className="flex flex-row justify-between">
           <DisplayTechIcons techStack={techstack} />
 
-          <Button className="btn-primary">
+          <Button asChild variant={"custom"}>
             <Link
               href={
                 feedback

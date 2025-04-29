@@ -1,29 +1,24 @@
 @import "tailwindcss";
-
 @plugin "tailwindcss-animate";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  /* Colors from first CSS file */
   --color-success-100: #49de50;
   --color-success-200: #42c748;
   --color-destructive-100: #f75353;
   --color-destructive-200: #c44141;
-
   --color-primary-100: #dddfff;
   --color-primary-200: #cac5fe;
-
   --color-light-100: #d6e0ff;
   --color-light-400: #6870a6;
   --color-light-600: #4f557d;
   --color-light-800: #24273a;
-
   --color-dark-100: #020408;
   --color-dark-200: #27282f;
   --color-dark-300: #242633;
-
   --font-mona-sans: "Mona Sans", sans-serif;
-
   --bg-pattern: url("/pattern.png");
 }
 
@@ -37,8 +32,10 @@
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
+  /* --- MODIFIED: Secondary color set to match purple-600 --- */
+  --secondary: oklch(0.59 0.24 290); /* Was oklch(0.97 0 0) */
+  /* --- MODIFIED: Secondary foreground set to white for contrast --- */
+  --secondary-foreground: oklch(1 0 0); /* Was oklch(0.205 0 0) */
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
@@ -71,8 +68,10 @@
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.922 0 0);
   --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
+  /* --- MODIFIED: Secondary color set to match purple-600 --- */
+  --secondary: oklch(0.59 0.24 290); /* Was oklch(0.269 0 0) */
+  /* --- MODIFIED: Secondary foreground set to white for contrast --- */
+  --secondary-foreground: oklch(1 0 0); /* Was oklch(0.985 0 0) */
   --muted: oklch(0.269 0 0);
   --muted-foreground: var(--light-100);
   --accent: oklch(0.269 0 0);
@@ -109,8 +108,8 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary); /* This will now use the updated --secondary */
+  --color-secondary-foreground: var(--secondary-foreground); /* This will now use the updated --secondary-foreground */
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
@@ -132,27 +131,61 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Colors from second CSS file */
+  --color-muted-alt: hsl(0, 0%, 14.9%);
+  --color-background-alt: hsl(0 0% 3.9%);
+  --color-foreground-alt: hsl(0 0% 98%);
+  --color-card-alt: hsl(0 0% 3.9%);
+  --color-card-foreground-alt: hsl(0 0% 98%);
+  --color-popover-alt: hsl(0 0% 3.9%);
+  --color-popover-foreground-alt: hsl(0 0% 98%);
+  --color-primary-alt: hsl(0 0% 98%);
+  --color-primary-foreground-alt: hsl(0 0% 9%);
+  --color-secondary-alt: hsl(0 0% 14.9%);
+  --color-secondary-foreground-alt: hsl(0 0% 98%);
+  --color-muted-foreground-alt: hsl(0 0% 63.9%);
+  --color-accent-alt: hsl(0 0% 14.9%);
+  --color-accent-foreground-alt: hsl(0 0% 98%);
+  --color-destructive-alt: hsl(0 62.8% 30.6%);
+  --color-destructive-foreground-alt: hsl(0 0% 98%);
+  --color-border-alt: hsl(0 0% 14.9%);
+  --color-input-alt: hsl(0 0% 14.9%);
+  --color-ring-alt: hsl(0 0% 83.1%);
+  --color-chart-1-alt: hsl(220 70% 50%);
+  --color-chart-2-alt: hsl(160 60% 45%);
+  --color-chart-3-alt: hsl(30 80% 55%);
+  --color-chart-4-alt: hsl(280 65% 60%);
+  --color-chart-5-alt: hsl(340 75% 55%);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    border-color: var(--color-border);
   }
+
   body {
     @apply bg-background text-foreground;
+    font-family: "Mona Sans", Arial, Helvetica, sans-serif;
   }
+
   p {
     @apply text-light-100;
   }
+
   h2 {
     @apply text-3xl font-semibold;
   }
+
   h3 {
     @apply text-2xl font-semibold;
   }
+
   ul {
     @apply list-disc list-inside;
   }
+
   li {
     @apply text-light-100;
   }
@@ -160,7 +193,7 @@
 
 @layer components {
   .btn-call {
-    @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white transition-colors duration-150 bg-success-100 border border-transparent rounded-full shadow-sm focus:outline-none focus:shadow-2xl active:bg-success-200 hover:bg-success-200 min-w-28 cursor-pointer items-center justify-center overflow-visible;
+    @apply inline-block px-7 py-3 font-bold text-sm leading-5 text-white transition-colors duration-150 bg-success-100 border border-transparent rounded-xs shadow-sm focus:outline-none focus:shadow-2xl active:bg-success-200 hover:bg-success-200 min-w-28 cursor-pointer items-center justify-center overflow-visible;
 
     .span {
       @apply bg-success-100 h-[85%] w-[65%];
@@ -174,15 +207,20 @@
   .btn-upload {
     @apply flex min-h-14 w-full items-center justify-center gap-1.5 rounded-md;
   }
+
   .btn-primary {
-    @apply w-fit !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
+    @apply w-fit !bg-primary-200 !text-dark-100 hover:!bg-primary-200/80  !font-bold px-5 cursor-pointer min-h-10;
   }
+
+  /* --- MODIFIED: .btn-secondary now uses theme variables --- */
   .btn-secondary {
-    @apply w-fit !bg-dark-200 !text-primary-200 hover:!bg-dark-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10;
+    /* Removed !important overrides and hardcoded colors */
+    /* Old: @apply w-fit !bg-dark-200 !text-primary-200 hover:!bg-dark-200/80 !rounded-full !font-bold px-5 cursor-pointer min-h-10; */
+    @apply w-fit bg-secondary text-secondary-foreground hover:brightness-90 /* Adjust hover as needed */ rounded-full font-bold px-5 cursor-pointer min-h-10;
   }
 
   .btn-upload {
-    @apply bg-dark-200 rounded-full min-h-12 px-5 cursor-pointer border border-input  overflow-hidden;
+    @apply bg-dark-200 rounded-full min-h-12 px-5 cursor-pointer border border-input overflow-hidden;
   }
 
   .card-border {
@@ -217,14 +255,14 @@
     }
 
     .card-interviewer {
-      @apply flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-lg border-2 border-primary-200/50 flex-1 sm:basis-1/2 w-full;
+      @apply flex-center flex-col gap-2 p-7 h-[400px] blue-gradient-dark rounded-md border-2 border-purple-600 flex-1 sm:basis-1/2 w-full;
     }
 
     .avatar {
       @apply z-10 flex items-center justify-center blue-gradient rounded-full size-[120px] relative;
 
       .animate-speak {
-        @apply absolute inline-flex size-5/6 animate-ping rounded-full bg-primary-200 opacity-75;
+        @apply absolute inline-flex size-5/6 animate-ping rounded-full border-purple-600 opacity-75;
       }
     }
 
@@ -241,7 +279,7 @@
     @apply border-gradient p-0.5 rounded-2xl w-full;
 
     .transcript {
-      @apply dark-gradient rounded-2xl  min-h-12 px-5 py-3 flex items-center justify-center;
+      @apply dark-gradient rounded-2xl min-h-12 px-5 py-3 flex items-center justify-center;
 
       p {
         @apply text-lg text-center text-white;
@@ -286,11 +324,37 @@
   }
 
   .card-interview {
-    @apply dark-gradient rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
+    @apply dark-gradient rounded-md min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between;
 
     .badge-text {
       @apply text-sm font-semibold capitalize;
     }
+  }
+
+  /* Added from second CSS file */
+  .gradient {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(160, 160, 160),
+      rgb(229, 231, 235),
+      rgb(75, 85, 99)
+    );
+  }
+
+  .gradient-title {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(160, 160, 160),
+      rgb(229, 231, 235),
+      rgb(75, 85, 99)
+    );
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    padding-bottom: 0.5rem;
+    padding-right: 0.5rem;
   }
 }
 
@@ -331,4 +395,64 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Hero Image Styles */
+.hero-image-wrapper {
+  perspective: 1000px;
+}
+
+.hero-image {
+  transform: rotateX(30deg) scale(1);
+  transition: transform 0.5s ease-out;
+  will-change: transform;
+}
+
+.hero-image.scrolled {
+  transform: rotateX(0deg) scale(1) translateY(40px);
+}
+
+/* Grid Background */
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      to right,
+      hsla(0, 0%, 100%, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, hsla(0, 0%, 100%, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.grid-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent, hsla(0, 0%, 0%, 0.9));
+}
+
+
+.gradient-title {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(160, 160, 160),
+    rgb(229, 231, 235),
+    rgb(75, 85, 99)
+  );
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem;
 }
