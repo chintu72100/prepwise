@@ -21,7 +21,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
       <span className="text-sm text-gray-500 italic">
           Powered by <span className="text-gray-300">EduSync</span> {" "}
         </span>
-        <a href="#" className="text-blue-500">
+        <a href="https://edu-sync-rho.vercel.app/dashboard" className="text-blue-500">
           <SquareArrowOutUpRight />
         </a>
       </div>
